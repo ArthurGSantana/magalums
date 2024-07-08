@@ -7,11 +7,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "tb_notification")
-public class Notification {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
-
+public class Notification extends BaseEntity {
     @Column(name = "dateTime")
     private LocalDateTime dateTime;
 
@@ -22,22 +18,14 @@ public class Notification {
     private String message;
 
     @ManyToOne
-    @JoinColumn(name = "channel_id")
+    @JoinColumn(name = "channelId")
     private Channel channel;
 
     @ManyToOne
-    @JoinColumn(name = "status_id")
+    @JoinColumn(name = "statusId")
     private NotificationStatus status;
 
     public Notification() {
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public LocalDateTime getDateTime() {

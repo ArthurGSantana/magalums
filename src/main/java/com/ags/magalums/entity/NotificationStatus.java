@@ -6,7 +6,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "tb_notification_status")
-public class NotificationStatus {
+public class NotificationStatus extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -15,14 +15,6 @@ public class NotificationStatus {
     private String name;
 
     public NotificationStatus() {
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public String getName() {

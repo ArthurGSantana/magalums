@@ -6,7 +6,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "tb_channel")
-public class Channel {
+public class Channel extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -15,14 +15,6 @@ public class Channel {
     private String name;
 
     public Channel() {
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public String getName() {
