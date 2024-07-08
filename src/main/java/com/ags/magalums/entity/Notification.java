@@ -8,14 +8,14 @@ import java.util.UUID;
 @Entity
 @Table(name = "tb_notification")
 public class Notification extends BaseEntity {
-    @Column(name = "dateTime")
-    private LocalDateTime dateTime;
-
     @Column(name = "destination")
     private String destination;
 
     @Column(name = "message")
     private String message;
+
+    @Column(name = "dateTime")
+    private LocalDateTime dateTime;
 
     @ManyToOne
     @JoinColumn(name = "channelId")
@@ -26,6 +26,14 @@ public class Notification extends BaseEntity {
     private NotificationStatus status;
 
     public Notification() {
+    }
+
+    public Notification(String destination, String message, LocalDateTime dateTime, Channel channel, NotificationStatus status) {
+        this.destination = destination;
+        this.message = message;
+        this.dateTime = dateTime;
+        this.channel = channel;
+        this.status = status;
     }
 
     public LocalDateTime getDateTime() {
