@@ -24,4 +24,23 @@ public class Channel extends BaseEntity {
     public void setName(String name) {
         this.name = name;
     }
+
+    public enum Values {
+        EMAIL("Email"),
+        SMS("SMS"),
+        PUSH("Push"),
+        WHATSAPP("WhatsApp");
+
+        private final String name;
+
+        Values(String name) {
+            this.name = name;
+        }
+
+        public Channel toChannel() {
+            Channel channel = new Channel();
+            channel.setName(name);
+            return channel;
+        }
+    }
 }

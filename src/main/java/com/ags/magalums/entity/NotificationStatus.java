@@ -24,4 +24,23 @@ public class NotificationStatus extends BaseEntity {
     public void setName(String name) {
         this.name = name;
     }
+
+    public enum Values {
+        PENDING("Pending"),
+        SUCCESS("Success"),
+        FAILED("Failed"),
+        CANCELED("Canceled");
+
+        private final String name;
+
+        Values(String name) {
+            this.name = name;
+        }
+
+        public NotificationStatus toNotificationStatus() {
+            NotificationStatus notificationStatus = new NotificationStatus();
+            notificationStatus.setName(name);
+            return notificationStatus;
+        }
+    }
 }
