@@ -6,8 +6,10 @@ import com.ags.magalums.entity.NotificationStatus;
 import com.ags.magalums.repository.NotificationRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 @Service
 public class NotificationService {
@@ -38,5 +40,22 @@ public class NotificationService {
         notification.setStatus(NotificationStatus.Values.CANCELED.toNotificationStatus());
 
         notificationRepository.save(notification);
+    }
+
+    public void checkAndSendNotifications(LocalDateTime dateTime) {
+        var notifications = notificationRepository.findByStatusInAndDateTimeBefore(List.of(
+                NotificationStatus.Values.PENDING.toNotificationStatus(),
+                NotificationStatus.Values.FAILED.toNotificationStatus()
+        ), dateTime);
+
+        notifications.forEach(sendNotification());
+    }
+
+    private Consumer<Notification> sendNotification() {
+        return notification -> {
+            // Send notification
+            notification.setStatus(NotificationStatus.Values.SUCCESS.toNotificationStatus());
+            notificationRepository.save(notification);
+        };
     }
 }
